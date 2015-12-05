@@ -2,11 +2,12 @@ import os
 import random
 import numpy as np
 from PIL import Image, ImageDraw
+from commons import *
 from configs import *
 
 
 def write_to_file(img, ext, filename):
-    filepath = os.path.join(shape_dir_path, filename)
+    filepath = os.path.join(train_image_dir, filename)
     with open(filepath, 'wb') as f:
         img.save(f, ext)
 
@@ -15,7 +16,7 @@ def draw_circle(img):
     # mode must be RGBA to ensure transparency
     draw = ImageDraw.Draw(img, 'RGBA')
     limit = min(img.width, img.height)
-    radius = random.randrange(50, limit // 4)
+    radius = random.randrange(50, limit // 6)
     center_x = random.randrange(0+radius, img.width-radius)
     center_y = random.randrange(0+radius, img.height-radius)
     x1, x2 = center_x - radius, center_x + radius
@@ -27,7 +28,10 @@ def draw_ellipse():
     pass
 
 
-def draw_square():
+def draw_square(img):
+    draw = ImageDraw.Draw(img, 'RGBA')
+    limit = min(img.width, img.height)
+    side = random.randrange(50, limit // 3)
     pass
 
 
@@ -56,33 +60,38 @@ SHAPE_ROUTES = {
 SHAPES = ['circle']
 
 
+def pad_index(x):
+    x = str(x)
+    return '0' * (4 - len(x)) + x
+
+
 def draw_shape(img, shape, df):
     assert shape in SHAPES
     assert df > 0 and df < 1.0
     SHAPE_ROUTES[shape](img)
 
 
-def draw_one(num_shapes, filename, res=(1000,1000), bgcolor=(255,255,255)):
+def draw_one(index, res=(1000,1000), bgcolor=(255,255,255)):
     img = Image.new('RGB', res, bgcolor)
-    for i in range(num_shapes):
-        shape = random.choice(SHAPES)
-        df = random.uniform(0.1, 0.4)
-        draw_shape(img, shape, df)
+    shape = random.choice(SHAPES)
+    df = random.uniform(0.1, 0.4)
+    draw_shape(img, shape, df)
+
+    filename = '{0}_{1}.png'.format(shape, pad_index(index))
     write_to_file(img, 'PNG', filename)
 
 
-def draw_many(num_drawings, max_shapes, filename_prefix):
-    def pad(x):
-        x = str(x)
-        return '0' * (4 - len(x)) + x
-
-    for i in range(num_drawings):
-        num_shapes = random.randrange(1, max_shapes+1)
-        draw_one(num_shapes, filename_prefix+pad(i)+'.png')
+# def draw_many(num_drawings, max_shapes):
+#
+#
+#     for i in range(num_drawings):
+#         num_shapes = random.randrange(1, max_shapes+1)
+#         draw_one(num_shapes)
 
 
 def main():
-    draw_many(10, 5, 'test_shape')
+    for i in range(10):
+        draw_one(i)
 
 
 if __name__ == '__main__':
