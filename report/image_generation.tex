@@ -1,0 +1,14 @@
+\section{Image Generation}
+
+\subsection{Overview}
+
+Training images are vital to our task. Computer generated images could be too standard so as to have very little noise, making our model vulnerable to possible noisy test images; hand-drawn sketches are too noisy, on the other hand, raising challenges for image feature extraction and complicating our rules. Both senarios could diminish the generalization ability of our model. Therefore we manage to generate three different kinds of images.
+
+First in the system prototyping stage, we use a painting tool to generate several images of circles, ellipses, triangles, rectangles and squares as the development set. Note that these images are not generated in vector format on purpose, introducing small noises on a pixel level. We hope that by analyzing these quasi-standard images, we can derive the basic framework of our system.
+
+Then in the tuning stage of the project, we use image processing algorithms to distort the images obtained in the first stage, obtaining a great amount of images and split them into training set and testing set. Then we use the training set to improve the system.
+
+Finally in the testing stage, we use the testing set obtained in the previous stage. We also ask different people to draw images with a digitized tablet. We decide not to use mouse because that would produce overly noisy images.
+
+\subsection{Details}
+
