@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 from commons import *
-from configs import *
 
 def aspect_ratio(cnt):
     x, y, w, h = cv2.boundingRect(cnt)
@@ -113,13 +112,13 @@ def main(input_dir):
         print '==========================='
         print input_file
 
-        label = input_file.split('_')[0]
+        label = input_file.split('.')[0].split('_')[1]
         try:
             features = process_image(os.path.join(input_dir, input_file))
         except:
             print 'processing file {0} failed'.format(input_file)
             raise
-        feature_values = [features[f] for f in feature_list] + [str(index), label]
+        feature_values = [features[f] for f in feature_list] + [str(index+1), label]
         print features
         f_output.write(','.join(feature_values) + '\n')
 
@@ -127,4 +126,4 @@ def main(input_dir):
 
 
 if __name__ == '__main__':
-    main(train_image_dir)
+    main(train_image_dir+'\\S')

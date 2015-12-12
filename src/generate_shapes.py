@@ -3,7 +3,6 @@ import random
 import numpy as np
 from PIL import Image, ImageDraw
 from commons import *
-from configs import *
 
 
 def write_to_file(img, ext, filename):
