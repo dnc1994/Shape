@@ -11,12 +11,11 @@ class ShapeRecognizer(object):
         fsets = {}
         rules = {}
 
-        fsets['Circle_Like_Thinness'] = fset.Trapezoid('Circle_Like_Thinness', (13.99, 0), (15.07, 1), (15.44, 1), (16.39, 0))
+        fsets['Circle_Like_Thinness'] = fset.LeftSkewTrapezoid('Circle_Like_Thinness', (12.56, 0), (15.44, 1), (16.39, 0))
         fsets['Square_Like_Thinness'] = fset.Trapezoid('Square_Like_Thinness', (15.34, 0), (17.78, 1), (18.65, 1), (19.00, 0))
-        fsets['Triangle_Like_Extent'] = fset.Triangle('Triangle_Like_Extent', (0.4828, 0), (0.5170, 1), (0.5512, 0))
+        fsets['Triangle_Like_Extent'] = fset.Triangle('Triangle_Like_Extent', (0.4828, 0), (0.5000, 1), (0.5512, 0))
         fsets['Ellipse_Like_Extent'] = fset.Trapezoid('Ellipse_Like_Extent', (0.7450, 0), (0.7740, 1), (0.790, 1), (0.8180, 0))
         fsets['Rectangle_Like_Extent'] = fset.RightSkewTrapezoid('Rectangle_Like_Extent', (0.795, 0), (0.9377, 1), (1, 0))
-
 
         rules['Circle'] = 'IF Thinness IS Circle_Like_Thinness AND Extent IS Ellipse_Like_Extent THEN Shape IS Circle'
         rules['Ellipse'] = 'IF Thinness IS NOT Circle_Like_Thinness AND Extent IS Ellipse_Like_Extent THEN Shape IS Ellipse'
