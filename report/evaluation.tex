@@ -9,3 +9,17 @@ The computer-generated testing set consists of 100 images with 20 images for eac
 \subsection{Result Analysis}
 
 The confusion matrix for the evaluation on computer-generated testing set is in Table 1.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\backslashbox{Label}{Recognized} & Circle & Ellipse & Triangle & Square & Rectangle \\ \hline
+Circle & 1.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ \hline
+Ellipse & 0.00 & 1.00 & 0.00 & 0.00 & 0.00 \\ \hline
+Triangle & 0.00 & 0.00 & 1.00 & 0.00 & 0.00 \\ \hline
+Square & 0.00 & 0.00 & 0.00 & 0.80 & 0.20 \\ \hline
+Rectangle & 0.00 & 0.00 & 0.00 & 0.00 & 1.00 \\ \hline
+\end{tabular}
+\caption{Confusion Matrix on Testing Data}
+\end{table}
