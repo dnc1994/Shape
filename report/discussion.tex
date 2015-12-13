@@ -1,21 +1,28 @@
 \section{Discussion}
 
-This section discusses the limitations (mainly about the expandability of the system) of my project and how it can be improved.
+This section discusses the limitations (mainly about the expandability of the system) of our project and how it can be improved.
 
-\subsection{Limited Shape Types}
+\subsection{Limited Set of Shape Categories}
+
+Currently we can only recognize between 5 figures. We plan to incorporate more figures into the system, as well as try autonomous feature generation and rule derivation on the new data.
+
+Under development.
 
 \subsection{About Image Processing}
 
+Currently, for the feature extraction to work smoothly, we make several assumptions. Mainly the contour lines in the image cannot be to thin, otherwise OpenCV would have problem finding the desired contour. While it is possible to apply some image transformations before feature extraction, it still remains a quite complicated (and out of the scope of this project) task to handle all kinds of visually valid images. Therefore we will only use thick-lined images in our project.
+
 \subsection{How to Derive New Rules}
 
-There's no doubt that if we obtain some new rules, we could just add them to the system. However, the main challenge here is how to derive these rules. Currently, we don't have a fully automatic method to do this. Rules must be derived with human intervention. However we could make this process a lot easier by using a decision tree model to help identify features that have discriminative power. 
+Since rules and inference are separated in our system, there's no doubt that if we obtain some new rules we could just add them to the system. However, the main challenge here is how to derive these rules. Currently, we don't have a fully automatic method to do this. Rules must be derived with human intervention. However we could make this process a lot easier by using a decision tree model to help identify features that have discriminative power. 
+
+Under development.
 
 \subsection{How to Generate New Features}
 
 Another problem is how to generate new features. Currently we use a subset of commonly used features. Of course we could use the whole set and select the useful ones, but that leaves us with two problems: 1. How to integrate these newly found features into our system automaticlly? 2. Can 
-we geneate features outside that set?
-
-I'm afraid I haven't got an autonomous solution that meets satisfaction.
+we geneate features outside that set? I'm afraid I haven't got an autonomous solution that meets satisfaction.
 
 With the second problem, I believe we could utilized genetic algorithms. A new feature could be represented by the product of some old features raised to a certain power. So we can encode the exponets of each base feature into a chronosome. And the fitness could be computed by testing how much information gain (as in the decision tree) could be achieve by using the feature encoded in the chronosome.
 
+Under development.

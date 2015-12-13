@@ -1,8 +1,10 @@
 \section{Evaluation}
 
-The evaluation consists of two parts: one with computer-generated testing set, one with hand-drawn sketches.
+The evaluation consists of two parts: one with computer-generated test set, one with hand-drawn sketches.
 
-\subsection{Experimental Result}
+\subsection{Computer-generated Test Set}
+
+\subsubsection{Experimental Result}
 
 The confusion matrix for the evaluation on computer-generated test set is in Table 1. The test set contains 100 figures with 20 figures from each category.
 
@@ -20,4 +22,10 @@ Rectangle & 0.00 & 0.00 & 0.00 & 0.30 & 0.70 \\ \hline
 \caption{Confusion Matrix on Testing Data}
 \end{table}
 
-\subsection{Error Analysis}
+\subsubsection{Error Analysis}
+
+We see that the main cause of error is that squares and rectangles are sometimes mixed up. This makes sense because some of rectangle images in our data do look quite square. To deal with this type of error, we may consider using new features. Under development.
+
+\subsection{Hand-drawn Sketches}
+
+Under development.
