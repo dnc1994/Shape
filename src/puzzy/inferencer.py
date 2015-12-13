@@ -39,14 +39,14 @@ class Inferencer(object):
 
     def fuzzify(self, inputs):
         for var, val in inputs.items():
-            print 'fuzzifying: {0} -> {1}'.format(var, val)
+            # print 'fuzzifying: {0} -> {1}'.format(var, val)
             self.inputs[var] = val
 
     def defuzzify(self):
         results = {}
         for var in self.outputs.keys():
             sort_list = [(v, k) for (k, v) in self.outputs[var].iteritems()]
-            print sort_list
+            # print sort_list
             results[var] = sorted(sort_list, reverse=True)[0][1]
         return results
 
