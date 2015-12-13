@@ -2,13 +2,9 @@
 
 The evaluation consists of two parts: one with computer-generated testing set, one with hand-drawn sketches.
 
-\subsection{Experimental Setup}
+\subsection{Experimental Result}
 
-The computer-generated testing set consists of 100 images with 20 images for each category.
-
-\subsection{Result Analysis}
-
-The confusion matrix for the evaluation on computer-generated testing set is in Table 1.
+The confusion matrix for the evaluation on computer-generated test set is in Table 1. The test set contains 100 figures with 20 figures from each category.
 
 \begin{table}[ht!]
 \centering
@@ -16,10 +12,12 @@ The confusion matrix for the evaluation on computer-generated testing set is in 
 \hline
 \backslashbox{Label}{Recognized} & Circle & Ellipse & Triangle & Square & Rectangle \\ \hline
 Circle & 1.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ \hline
-Ellipse & 0.00 & 1.00 & 0.00 & 0.00 & 0.00 \\ \hline
+Ellipse & 0.10 & 0.90 & 0.00 & 0.00 & 0.00 \\ \hline
 Triangle & 0.00 & 0.00 & 1.00 & 0.00 & 0.00 \\ \hline
-Square & 0.00 & 0.00 & 0.00 & 0.80 & 0.20 \\ \hline
-Rectangle & 0.00 & 0.00 & 0.00 & 0.00 & 1.00 \\ \hline
+Square & 0.00 & 0.00 & 0.00 & 0.75 & 0.25 \\ \hline
+Rectangle & 0.00 & 0.00 & 0.00 & 0.30 & 0.70 \\ \hline
 \end{tabular}
 \caption{Confusion Matrix on Testing Data}
 \end{table}
+
+\subsection{Error Analysis}
