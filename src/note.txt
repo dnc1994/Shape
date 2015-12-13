@@ -1,4 +1,0 @@
-1. generate
-2. extract
-3. decision tree
-4. fuzzy engine
