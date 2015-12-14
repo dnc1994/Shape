@@ -7,21 +7,30 @@ from commons import *
 
 
 class ShapeRecognizer(object):
-    def __init__(self):
+    def __init__(self, rule_base='rule_base.txt'):
         fsets = {}
         rules = {}
 
-        fsets['Circle_Like_Thinness'] = fset.LeftSkewTrapezoid('Circle_Like_Thinness', (12.56, 0), (15.44, 1), (16.39, 0))
-        fsets['Square_Like_Thinness'] = fset.Trapezoid('Square_Like_Thinness', (15.34, 0), (17.78, 1), (18.65, 1), (19.00, 0))
-        fsets['Triangle_Like_Extent'] = fset.Triangle('Triangle_Like_Extent', (0.4828, 0), (0.5000, 1), (0.5512, 0))
-        fsets['Ellipse_Like_Extent'] = fset.Trapezoid('Ellipse_Like_Extent', (0.7450, 0), (0.7740, 1), (0.790, 1), (0.8180, 0))
-        fsets['Rectangle_Like_Extent'] = fset.RightSkewTrapezoid('Rectangle_Like_Extent', (0.795, 0), (0.9377, 1), (1, 0))
+        try:
+            with open(rule_base, 'r') as f:
+                while True:
+                    line = f.readline()
+                    if not line or not line.strip('\n'):
+                        break
+                    line = line.strip('\n')
+                    name, shape, pts = line.split('\t')
+                    pts = [pt.split(',') for pt in pts.split(' ')]
+                    pts = [(float(x), float(y)) for (x, y) in pts]
+                    fsets[name] = fset_routes[shape](name, *pts)
 
-        rules['Circle'] = 'IF Thinness IS Circle_Like_Thinness AND Extent IS Ellipse_Like_Extent THEN Shape IS Circle'
-        rules['Ellipse'] = 'IF Thinness IS NOT Circle_Like_Thinness AND Extent IS Ellipse_Like_Extent THEN Shape IS Ellipse'
-        rules['Triangle'] = 'IF Extent IS Triangle_Like_Extent THEN Shape IS Triangle'
-        rules['Square'] = 'IF Thinness IS Square_Like_Thinness AND Extent IS Rectangle_Like_Extent THEN Shape IS Square'
-        rules['Rectangle'] = 'IF Thinness IS NOT Square_Like_Thinness AND Extent IS Rectangle_Like_Extent THEN Shape IS Rectangle'
+                while True:
+                    line = f.readline()
+                    if not line:
+                        break
+                    name, rule = line.strip('\n').split('\t')
+                    rules[name] = rule
+        except:
+            raise
 
         self.inferencer = Inferencer()
         self.inferencer.add_fsets(fsets.values())
@@ -54,5 +63,5 @@ def test(input_dir):
         print result
 
 if __name__ == '__main__':
-    # test(train_image_dir)
-    main()
+    test(sketch_image_dir)
+    # main()

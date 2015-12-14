@@ -1,4 +1,5 @@
 import random
+from puzzy import fset
 
 
 shape_list = ['Circle', 'Ellipse', 'Triangle', 'Square', 'Rectangle']
@@ -8,6 +9,13 @@ feature_list = [
     'Extent',
     'Corners'
 ]
+
+fset_routes = {
+    'TRI': fset.Triangle,
+    'TPZ': fset.Trapezoid,
+    'LST': fset.LeftSkewTrapezoid,
+    'RST': fset.RightSkewTrapezoid
+}
 
 devel_image_dir = 'C:\\Home\\Projects\\Shape\\data\\devel_image'
 train_image_dir = 'C:\\Home\\Projects\\Shape\\data\\train_image'
