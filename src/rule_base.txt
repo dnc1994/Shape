@@ -1,8 +1,8 @@
-Circle_Like_Thinness	LST	12.56,0 15.44,1 16.39,0
-Square_Like_Thinness	TPZ	15.34,0 17.78,1 18.65,1 19.00,0
-Triangle_Like_Extent	TRI	0.4828,0 0.5000,1 0.5512,0
-Ellipse_Like_Extent	TPZ	0.7450,0 0.7740,1 0.790,1 0.8180,0
-Rectangle_Like_Extent	TRI	0.7950,0 0.9377,1 1.0000,0
+Circle_Like_Thinness	LST	12.56,0 15.46,1 16.25,0
+Square_Like_Thinness	TPZ	15.99,0 17.84,1 18.68,1 19.06,0
+Triangle_Like_Extent	TRI	0.499,0 0.516,1 0.539,0
+Ellipse_Like_Extent	TPZ	0.668,0 0.7740,1 0.780,1 0.888,0
+Rectangle_Like_Extent	TRI	0.912,0 0.936,1 1.0000,0
 
 Circle	IF Thinness IS Circle_Like_Thinness AND Extent IS Ellipse_Like_Extent THEN Shape IS Circle
 Ellipse	IF Thinness IS NOT Circle_Like_Thinness AND Extent IS Ellipse_Like_Extent THEN Shape IS Ellipse

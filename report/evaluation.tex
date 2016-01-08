@@ -4,27 +4,51 @@ The evaluation consists of two parts: one with computer-generated test set, one 
 
 \subsection{Computer-generated Test Set}
 
-\subsubsection{Experimental Result}
+\subsubsection{Result on Development Set}
 
-The confusion matrix for the evaluation on computer-generated test set is in Table 1. The test set contains 100 figures with 20 figures from each category.
+The confusion matrix for the evaluation on the development set is in Table 1. The development set contains 1000 figures with 200 figures from each category.
 
 \begin{table}[ht!]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \backslashbox{Label}{Recognized} & Circle & Ellipse & Triangle & Square & Rectangle \\ \hline
-Circle & 1.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ \hline
-Ellipse & 0.10 & 0.90 & 0.00 & 0.00 & 0.00 \\ \hline
-Triangle & 0.00 & 0.00 & 1.00 & 0.00 & 0.00 \\ \hline
-Square & 0.00 & 0.00 & 0.00 & 0.75 & 0.25 \\ \hline
-Rectangle & 0.00 & 0.00 & 0.00 & 0.30 & 0.70 \\ \hline
+Circle & 0.55 & 0.03 & 0.42 & 0.00 & 0.00 \\ \hline
+Ellipse & 0.12 & 0.82 & 0.06 & 0.00 & 0.00 \\ \hline
+Triangle & 0.00 & 0.00 & 0.99 & 0.00 & 0.01 \\ \hline
+Square & 0.00 & 0.00 & 0.03 & 0.79 & 0.19 \\ \hline
+Rectangle & 0.00 & 0.00 & 0.04 & 0.39 & 0.56 \\ \hline
 \end{tabular}
-\caption{Confusion Matrix on Testing Data}
+\caption{Confusion Matrix on Development Data}
 \end{table}
 
 \subsubsection{Error Analysis}
 
-We see that the main cause of error is that squares and rectangles are sometimes mixed up. This makes sense because some of rectangle images in our data do look quite square. To deal with this type of error, we may consider using new features. Under development.
+First we see that nearly a half of circles are incorrectly recognized as triangles. Upon examination we find that these circles actually do not fall into any fuzzy sets because of their larger-than-expected $Thinness$ ratio. Sorting on the list with each shape's score = 0, a unexpected side effect happen that the letter ``T'' is alphabetically the largest. This problem can be fixed by making sure that \textbf{all fuzzy sets are interleaved and no blank area is left}, as what we do in this case of circles vs. squares. Besides there are about 4\% circles show a $Extent$ ratio of 1 due to image processing errors.
+
+Second we see that only 82\% ellipses are correctly recognized. The issue here is similar to the first one, but slightly different with the solution. The $Extent$ ratio for triangles and rectangles are quite centralized around 0.5 and 1.0. Therefore we can safely expand the confidence range of ellipses.
+
+Finally We see that squares and rectangles are sometimes mixed up. This makes sense because some of rectangle images in our data do look like squares. To deal with this type of error, we may consider using new features, such as identifying and comparing all the sides in the shape.
+
+\subsubsection{Result on Testing Set}
+
+After applying the necessary tweaks to the ``parameters'' (boundaries of fuzzy sets), we evaluate our system on the testing set, which also contains 1000 figures with 200 figures from each category. The confusion matrix is in Table 2.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\backslashbox{Label}{Recognized} & Circle & Ellipse & Triangle & Square & Rectangle \\ \hline
+Circle & 0.96 & 0.01 & 0.03 & 0.00 & 0.00 \\ \hline
+Ellipse & 0.28 & 0.70 & 0.02 & 0.00 & 0.00 \\ \hline
+Triangle & 0.00 & 0.00 & 0.99 & 0.00 & 0.01 \\ \hline
+Square & 0.00 & 0.00 & 0.00 & 0.90 & 0.10 \\ \hline
+Rectangle & 0.00 & 0.01 & 0.03 & 0.39 & 0.58 \\ \hline
+\end{tabular}
+\caption{Confusion Matrix on Testing Data}
+\end{table}
+
+Apart from the squares and rectangles mixing up, we notice that circles and ellipses also mix up due to similar reasons: some of ellipse images in our data do look like circles. But as this is largely due to the \textbf{inherent ambiguity in the images we use}, it would not be a serious issue when testing against hand-drawn sketches. Because \textbf{sketches are usually exaggerated in some ways to avoid double interpretation}, unless the person who draws them intentionally make them very ambiguous.
 
 \subsection{Hand-drawn Sketches}
 

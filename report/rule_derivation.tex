@@ -2,15 +2,19 @@
 
 \subsection{Manual Rule Derivation}
 
-After observing a couple of patterns from data in the development set and reasoning about their validity, we come up with several heuristics.
+After observing a couple of patterns from data in the prototyping set and reasoning about their validities, we come up with several heuristics.
 
 First we notice that $Extent$ is a very good feature to start with: triangles have a $Extent$ ratio close to 0.5, rectangles and squares have a $Extent$ ratio close to 1, while circles and ellipses have a $Extent$ ratio of around 0.75 $\sim$ 0.85.
 
-Then we use $Thinness$ ratio to distinguish circles and ellipses. Among common 2D figures, circle has the smallest thinness ($=4\pi$). Similarily, when rectangles have $Thinness$ ratio close to 16, they become squares.
+Then we can use $Thinness$ ratio to distinguish circles and ellipses. Among common 2D figures, circle has the smallest thinness ($=4\pi$).
+
+Similarily, when rectangles have $Thinness$ ratio close to 16, they become squares.
+
+For the feature $Corners$, as mentioned in Section 3.3, it's a very shaky feature for our task. Therefore we decide not to use it.
 
 Finally, we obtain 5 simple rules:
 
-\begin{itemize}
+\begin{enumerate}
 
 \item \textit{IF Thinness IS LIKE Circle AND Extent IS LIKE ellipse THEN Shape IS Circle}
 \item \textit{IF Thinness IS NOT LIKE Circle AND Extent IS LIKE ellipse THEN Shape IS Ellipse}
@@ -18,7 +22,7 @@ Finally, we obtain 5 simple rules:
 \item \textit{IF Thinness IS LIKE Square AND Extent IS LIKE rectangle THEN Shape IS Square}
 \item \textit{IF Thinness IS NOT LIKE Square AND Extent IS LIKE rectangle THEN Shape IS Rectangle}
 
-\end{itemize}
+\end{enumerate}
 
 \subsection{Autonomous Rule Derivation}
 

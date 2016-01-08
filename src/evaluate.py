@@ -1,6 +1,7 @@
 import os
 import copy
 from recognize import ShapeRecognizer
+from extract_features import process_image
 from commons import *
 
 
@@ -28,7 +29,8 @@ def eval_dataset(input_dir, output_file, need_latex=True):
             label = label.title()
             recognized_label = recognized_label.title()
             if label != recognized_label:
-                error_list.append((filename, label, recognized_label))
+                feature_str = str(process_image(input_file))
+                error_list.append((filename, label, recognized_label, feature_str))
             confusion_matrix[label][recognized_label] = 1 + confusion_matrix[label].get(recognized_label, 0)
 
     confusion_matrix_percent = copy.deepcopy(confusion_matrix)
@@ -52,9 +54,9 @@ def eval_dataset(input_dir, output_file, need_latex=True):
             f.write(line + '\n')
         f.write('\n')
         f.write('Error List\n')
-        f.write(','.join(['File', 'Label', 'Recognized']) + '\n')
-        for (filename, label, recognized_label) in error_list:
-            line = ','.join([filename, label, recognized_label])
+        f.write(','.join(['File', 'Label', 'Recognized', 'Features']) + '\n')
+        for (filename, label, recognized_label, feature_str) in error_list:
+            line = ','.join([filename, label, recognized_label, feature_str])
             f.write(line + '\n')
 
     if need_latex:
@@ -64,5 +66,5 @@ def eval_dataset(input_dir, output_file, need_latex=True):
 
 if __name__ == '__main__':
     eval_dataset(devel_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_devel_image')
-    # eval_dataset(test_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_test_image')
+    eval_dataset(test_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_test_image')
     # eval_dataset(sketch_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_sketch_image')

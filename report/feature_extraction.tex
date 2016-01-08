@@ -4,7 +4,7 @@ Feature extraction is mainly done with OpenCV.
 
 \subsection{Contours}
 
-Contours are probably the most starightforward feature that one can be think of. With the help of OpenCV, once we've found the contour of the target figure, we can calcuate the following:
+Contours are probably the most starightforward feature that one can be think of. With the help of OpenCV, once we've found the \textbf{contour} of the target figure, we can calcuate the following:
 
 \begin{itemize}
 \item Perimeter: apply cv2.arcLength on the contour gives us an approximation of the perimeter.
@@ -24,4 +24,10 @@ In computer vision, when it comes to geometric figures, there are several freque
 \item $Extent = \frac{A}{A_{BR}}$: Extent measures the how much space the figure takes up in its bounding rectangle (the rectangle of the smallest area that bounds the target figure).
 \end{itemize}
 
-Technically, we can generate more features based on current ones, as long as they are useful for in our task. Currently features are selected based on geometric knowledge (maybe ``common sense'' is a better word) and observation of the training data. It is entirely possible to apply some machine learning techniques to autonomously generate and select new features. We will discuss this in Section 7.
+\subsection{Autonomous Feature Discovery}
+
+Technically, we can generate more features based on current ones, as long as they are useful for in our task. Currently features are selected based on \textbf{geometric knowledge (maybe ``common sense'' is a better word) and observation of the training data}. It is entirely possible to apply some machine learning techniques to autonomously generate and select new features. Here we experiment with genetic algorithms.
+
+Under development.
+
+With the second problem, I believe we could utilized genetic algorithms. A new feature could be represented by the product of some old features raised to a certain power. So we can encode the exponets of each base feature into a chronosome. And the fitness could be computed by testing how much information gain (as in the decision tree) could be achieve by using the feature encoded in the chronosome.
