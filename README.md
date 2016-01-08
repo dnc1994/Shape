@@ -9,14 +9,29 @@ Read report for implementation details and experimental results.
 ## Author
 [Linghao Zhang](https://github.com/dnc1994)
 
+## Workflow
+
+0. Experiment with standards shapes to derive the basic rules and framework of the system.
+1. Generate random images and introduce noise by distorting and rotating.
+2. Split images into training set, development set and testing set.
+3. Extract features using OpenCV.
+4. Use simple statistics from traning set to determine the shape and boundary of each fuzzy sets.
+5. Write fuzzy sets and rules into a separate rule base file.
+6. Implement a simplified Sugeno-style inferencer
+7. Tune parameters using development set.
+8. Evaluate performance on testing set.
+9. Ask different persons to drawn sketches as additional test images
+
 ## Overview
 
-* `src/puzzy/fset.py`
-* `src/puzzy/inferencer.py`
-* `src/puzzy/rule.py`
-* `src/commons.py`
-* `src/evaluate.py`
-* `src/extract_features.py`
-* `src/generate_images.py`
-* `src/recognize.py`
-* `src/rule_base.txt`
+* `src/puzzy/fset.py` Define different types of fuzzy sets, with representation and membership function.
+* `src/puzzy/inferencer.py` Implement inference engine.
+* `src/puzzy/rule.py` Implement rule representation and parsing.
+* `src/analyze_features.py` Use simple statistics to analyze features.
+* `src/discover_features.py` Try automatic feature discovery.
+* `src/evaluate.py` Evaluate performance on a given dataset.
+* `src/extract_features.py` Extract features from a given dataset.
+* `src/ga.py` Implement Genetic Algorithm for automatic feature discovery.
+* `src/generate_images.py` Generate random noisy images.
+* `src/recognize.py` Interface for shape recognition.
+* `src/rule_base.txt` Rule base for the system.
