@@ -63,5 +63,6 @@ def eval_dataset(input_dir, output_file, need_latex=True):
 
 
 if __name__ == '__main__':
-    # eval_dataset(sketch_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_test_image', True)
-    eval_dataset(test_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_test_image')
+    eval_dataset(devel_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_devel_image')
+    # eval_dataset(test_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_test_image')
+    # eval_dataset(sketch_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_sketch_image')

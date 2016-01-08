@@ -144,18 +144,21 @@ def draw_many(shape, num_per_set, save_path):
         cv2.imwrite(filepath, img)
 
 
-def generate_data(num_per_set, split_ratio=0.9):
+def generate_data(num_per_set, train_ratio=0.8, devel_ratio=0.1, test_ratio=0.1):
     global count
-    delim = int(num_per_set * split_ratio)
+    num_train = int(num_per_set * train_ratio)
+    num_devel = int(num_per_set * devel_ratio)
+    num_test = num_per_set - num_train - num_devel
 
     for shape in shape_list:
         count = 0
-        draw_many(shape, delim, train_image_dir)
-        draw_many(shape, num_per_set - delim, test_image_dir)
+        draw_many(shape, num_train, train_image_dir)
+        draw_many(shape, num_devel, devel_image_dir)
+        draw_many(shape, num_test, test_image_dir)
 
 
 if __name__ == '__main__':
     random.seed(time.time())
     global rd
     rd = RandomDegree()
-    generate_data(200)
+    generate_data(2000)

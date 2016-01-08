@@ -62,6 +62,7 @@ def test(input_dir):
     for result in results:
         print result
 
+
 if __name__ == '__main__':
     test(sketch_image_dir)
     # main()
