@@ -24,14 +24,13 @@ Read report for implementation details and experimental results.
 
 ## Overview
 
-* `src/puzzy/fset.py` Define different types of fuzzy sets, with representation and membership function.
+* `src/puzzy/fset.py` Define different types of fuzzy sets (representation and membership function).
 * `src/puzzy/inferencer.py` Implement inference engine.
 * `src/puzzy/rule.py` Implement rule representation and parsing.
-* `src/analyze_features.py` Use simple statistics to analyze features.
-* `src/discover_features.py` Try automatic feature discovery.
+* `src/analyze_features.py` Analyze features using simple statistics.
 * `src/evaluate.py` Evaluate performance on a given dataset.
 * `src/extract_features.py` Extract features from a given dataset.
-* `src/ga.py` Implement Genetic Algorithm for automatic feature discovery.
 * `src/generate_images.py` Generate random noisy images.
-* `src/recognize.py` Interface for shape recognition.
+* `src/recognize.py` Interface for recognition.
 * `src/rule_base.txt` Rule base for the system.
+* `data/sample/` Sample images used in development and evaluation.
