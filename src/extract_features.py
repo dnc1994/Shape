@@ -50,7 +50,7 @@ def fmt_float(x):
     return '{0:.3f}'.format(x)
 
 
-def process_image(img_file):
+def process_image(img_file, multi=False):
     features = {}
 
     img = cv2.imread(img_file)

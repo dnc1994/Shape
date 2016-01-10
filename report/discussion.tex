@@ -2,7 +2,6 @@
 
 This section discusses the limitations (mainly about the expandability of the system) of our project and how it can be improved.
 
-
 \subsection{About Image Processing}
 
 \textbf{Currently we do not support images which contains overlapping shapes} due to the fact that dealing with overlapping shapes are very difficult.
@@ -15,12 +14,14 @@ Currently we can only recognize between 5 figures. To incorporate more figures i
 
 \subsubsection{Deriving New Rules}
 
-Since rules and inference are separated in our system, there's no doubt that if we obtain some new rules we could just add them to the system. Therefore the main challenge here is how to derive these rules. Currently, we don't have a fully automatic method to do this. Rules must be derived with human intervention. However, we could \textbf{make this process a lot easier by using a decision tree model to help identify features that have discriminative power}, as used for the fitness function of the genetic algorithm described in section 3.4.
+Since rules and inference are separated in our system, there's no doubt that if we obtain some new rules we could just add them to the system. Therefore the main challenge here is how to derive these rules. Currently, we don't have a fully automatic way to do that. Rules must be derived with human intervention. However, we could \textbf{make this process a lot easier by using a decision tree model (or to be precise, the \textbf{information gain} used in it) to help measure the discriminative power a rule  has}. We simply evaluate the information gain brought by using the features referenced in the given rule as the classification criteria.
 
 \subsubsection{Discovering New Features}
 
-Another problem is how to generate new features. Currently we use a subset of commonly used features. Of course we could use the whole set and select the useful ones, but that leaves us with two problems: 1. How to identify the most useful features? 2. How to integrate newly found features into our system automaticlly?
+Technically, we can generate more features based on current ones, as long as they are useful for in our task. Currently features are selected based on \textbf{geometric knowledge (maybe ``common sense'' is a better word) and observation of the training data}. It is entirely possible to apply some machine learning techniques to autonomously generate and select new features. But there are two problems to consider: 1. How to identify the most useful features? 2. How to integrate newly found features into our system automaticlly?
 
-With the the first problem, we experiment with genetic algorithms as a way to generate features outside the original feature set. Another (better?) approach is to use the whole feature along with all the derivatives and perform \textbf{feature selection} techniques (e.g. LASSO).
+One solution to the first problem is to use genetic algorithms as a way to generate features outside the original feature set. Suppose we have a feature set $x_1, x_2, ..., x_N$, we could form a new feature by multiplying the value of each feature raised to a certain power. In other words the new feature $x_{NEW} = \prod_{i=1}^{N} x_i^(p_i)$. Then we can encode $\vec{p} = \[p_1, p_2, ..., p_N\]$ into a chronosome. The the fitness score of a chronosome can be computed as the information gain brought by the feature it represent. For this encoding schema the usual crossover and mutation operators should suffice. However due to limited time available in this project, this approach is not experimented.
+
+Another (better?) approach to the first problem is to use the whole feature set along with all the derivatives (using the same expansion methods described above) and perform \textbf{feature selection} techniques (e.g. LASSO).
 
 The second problem is actually the rule derivation problem paraphrased. It's very hard to entirely eliminate human intervention from this process. Either we \textbf{incorporate the feature into some existing rule} after validating its discriminative power, or we just \textbf{add a new rule}, then the inferencer would deal with multiple rules itself. Yet \textbf{how to combine outcomes of differnet rules} would become a new ``parameter'' that may need training and tuning.

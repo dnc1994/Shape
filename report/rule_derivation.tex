@@ -1,12 +1,14 @@
 \section{Rule Derivation}
 
+Rules derived are stored in \textit{rule\_base.txt}, together with the definitions of fuzzy sets.
+
 \subsection{Manual Rule Derivation}
 
 After observing a couple of patterns from data in the prototyping set and reasoning about their validities, we come up with several heuristics.
 
 First we notice that $Extent$ is a very good feature to start with: triangles have a $Extent$ ratio close to 0.5, rectangles and squares have a $Extent$ ratio close to 1, while circles and ellipses have a $Extent$ ratio of around 0.75 $\sim$ 0.85.
 
-Then we can use $Thinness$ ratio to distinguish circles and ellipses. Among common 2D figures, circle has the smallest thinness ($=4\pi$).
+Then we can use $Thinness$ ratio to distinguish circles and ellipses, because circle has the smallest thinness ($=4\pi$) among all 2D figures,.
 
 Similarily, when rectangles have $Thinness$ ratio close to 16, they become squares.
 

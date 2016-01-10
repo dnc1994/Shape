@@ -5,7 +5,7 @@ from extract_features import process_image
 from commons import *
 
 
-def eval_dataset(input_dir, output_file, need_latex=True):
+def eval_dataset(input_dir, output_file, need_latex=True, sketch=False):
     recognizer = ShapeRecognizer()
 
     confusion_matrix = {}
@@ -36,7 +36,7 @@ def eval_dataset(input_dir, output_file, need_latex=True):
     confusion_matrix_percent = copy.deepcopy(confusion_matrix)
     for shape in shape_list:
         count = sum(confusion_matrix_percent[shape].values())
-        if count == 0:
+        if count == 0 or sketch:
             continue
         for key in confusion_matrix_percent[shape].keys():
             confusion_matrix_percent[shape][key] /= float(count)
@@ -49,8 +49,8 @@ def eval_dataset(input_dir, output_file, need_latex=True):
         latex_lines.append(' & '.join([r'\backslashbox{Label}{Recognized}'] + shape_list) + ' \\\\ \\hline\n')
         for shape in shape_list:
             row = [confusion_matrix_percent[shape][label] for label in shape_list]
-            line = ','.join([shape] + ['{0:.2f}'.format(val) for val in row])
-            latex_lines.append(' & '.join([shape] + ['{0:.2f}'.format(val) for val in row]) + ' \\\\ \\hline\n')
+            line = ','.join([shape] + [('{0:.2f}' if not sketch else '{0}').format(val) for val in row])
+            latex_lines.append(' & '.join([shape] + [('{0:.2f}' if not sketch else '{0}').format(val) for val in row]) + ' \\\\ \\hline\n')
             f.write(line + '\n')
         f.write('\n')
         f.write('Error List\n')
@@ -66,5 +66,5 @@ def eval_dataset(input_dir, output_file, need_latex=True):
 
 if __name__ == '__main__':
     eval_dataset(devel_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_devel_image')
-    eval_dataset(test_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_test_image')
-    # eval_dataset(sketch_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_sketch_image')
+    # eval_dataset(test_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_test_image')
+    # eval_dataset(sketch_image_dir, 'C:\\Home\\Projects\\Shape\\data\\eval_sketch_image', sketch=True)

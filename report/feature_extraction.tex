@@ -4,7 +4,7 @@ Feature extraction is mainly done with OpenCV.
 
 \subsection{Contours}
 
-Contours are probably the most starightforward feature that one can be think of. With the help of OpenCV, once we've found the \textbf{contour} of the target figure, we can calcuate the following:
+Contours are probably the most starightforward feature that one can think of. With the help of OpenCV, once we've found the \textbf{contour} of the target figure, we can calcuate the following:
 
 \begin{itemize}
 \item Perimeter: apply cv2.arcLength on the contour gives us an approximation of the perimeter.
@@ -13,21 +13,17 @@ Contours are probably the most starightforward feature that one can be think of.
 
 \subsection{SIFT}
 
-SIFT allows us to easily find keypoints(corners) in the image. At first glance it seems to be a great features, since it can distinguish circle/ellipse from triangles and rectangles/squares. However, the extraction of this feature it's highly unstable. A little noise in the image could increase the number of keypoints by, like, 20. Although it's possible to set some thresholds to tune out the undesired keypoints, still we couldn't put too much confidence on this feature.
+SIFT allows us to easily find key points (corners) in the image. At first glance it seems to be a great feature, since it can distinguish circles / ellipses from triangles and rectangles / squares. However, the extraction of this feature is highly unstable. A little noise (e.g. a zigzag line) in the image could increase the number of key points by more than 20. Although it's possible to set some thresholds to tune out the undesired key points, still we couldn't put too much confidence on this feature.
 
 \subsection{Feature Expansion}
 
 In computer vision, when it comes to geometric figures, there are several frequently used features that we can easily obtain using the existing features. Some of them turn out to be useful for our task:
 
 \begin{itemize}
-\item $Thinness = \frac{P^2}{A}$: Thinness measures the degree to which the figure is 'economical' in using its perimeter to enclose an area. 
-\item $Extent = \frac{A}{A_{BR}}$: Extent measures the how much space the figure takes up in its bounding rectangle (the rectangle of the smallest area that bounds the target figure).
+\item $Thinness = \frac{P^2}{A}$: Thinness measures the degree to which the figure is ``economical'' in using its perimeter to enclose an area. 
+\item $Extent = \frac{A}{A_{br}}$: Extent measures the how much space the figure takes up in its bounding rectangle (the rectangle of the smallest area that bounds the target figure).
 \end{itemize}
 
 \subsection{Autonomous Feature Discovery}
 
-Technically, we can generate more features based on current ones, as long as they are useful for in our task. Currently features are selected based on \textbf{geometric knowledge (maybe ``common sense'' is a better word) and observation of the training data}. It is entirely possible to apply some machine learning techniques to autonomously generate and select new features. Here we experiment with genetic algorithms.
-
-Under development.
-
-With the second problem, I believe we could utilized genetic algorithms. A new feature could be represented by the product of some old features raised to a certain power. So we can encode the exponets of each base feature into a chronosome. And the fitness could be computed by testing how much information gain (as in the decision tree) could be achieve by using the feature encoded in the chronosome.
+We will discuss the possibility of autonomous rule derivation in Section 7.

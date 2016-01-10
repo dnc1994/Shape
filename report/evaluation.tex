@@ -4,31 +4,33 @@ The evaluation consists of two parts: one with computer-generated test set, one 
 
 \subsection{Computer-generated Test Set}
 
-\subsubsection{Result on Development Set}
+\subsubsection{Result on Developing Set}
 
-The confusion matrix for the evaluation on the development set is in Table 1. The development set contains 1000 figures with 200 figures from each category.
+The confusion matrix for the evaluation on the development set is in Table 1. The developing set contains 1000 figures with 200 figures from each category.
 
 \begin{table}[ht!]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \backslashbox{Label}{Recognized} & Circle & Ellipse & Triangle & Square & Rectangle \\ \hline
-Circle & 0.55 & 0.03 & 0.42 & 0.00 & 0.00 \\ \hline
-Ellipse & 0.12 & 0.82 & 0.06 & 0.00 & 0.00 \\ \hline
-Triangle & 0.00 & 0.00 & 0.99 & 0.00 & 0.01 \\ \hline
-Square & 0.00 & 0.00 & 0.03 & 0.79 & 0.19 \\ \hline
-Rectangle & 0.00 & 0.00 & 0.04 & 0.39 & 0.56 \\ \hline
+Circle & \textbf{0.55} & 0.03 & 0.42 & 0.00 & 0.00 \\ \hline
+Ellipse & 0.12 & \textbf{0.82} & 0.06 & 0.00 & 0.00 \\ \hline
+Triangle & 0.00 & 0.00 & \textbf{0.99} & 0.00 & 0.01 \\ \hline
+Square & 0.00 & 0.00 & 0.03 & \textbf{0.79} & 0.19 \\ \hline
+Rectangle & 0.00 & 0.00 & 0.04 & 0.39 & \textbf{0.56} \\ \hline
 \end{tabular}
-\caption{Confusion Matrix on Development Data}
+\caption{Confusion Matrix on Developing Set}
 \end{table}
 
-\subsubsection{Error Analysis}
+\subsubsection{Error Analysis and Tuning}
 
-First we see that nearly a half of circles are incorrectly recognized as triangles. Upon examination we find that these circles actually do not fall into any fuzzy sets because of their larger-than-expected $Thinness$ ratio. Sorting on the list with each shape's score = 0, a unexpected side effect happen that the letter ``T'' is alphabetically the largest. This problem can be fixed by making sure that \textbf{all fuzzy sets are interleaved and no blank area is left}, as what we do in this case of circles vs. squares. Besides there are about 4\% circles show a $Extent$ ratio of 1 due to image processing errors.
+First we see that nearly a half of circles are incorrectly recognized as triangles. Upon examination we find that these circles actually do not fall into any fuzzy sets because of their larger-than-expected $Thinness$ ratio. Sorting on the list with each shape's score = 0, a unexpected side effect happen that the letter ``T'' is alphabetically the largest. This problem can be fixed by making sure that \textbf{all fuzzy sets are interleaved and no blank area is left}, as what we do in this case of circles vs. squares.
 
-Second we see that only 82\% ellipses are correctly recognized. The issue here is similar to the first one, but slightly different with the solution. The $Extent$ ratio for triangles and rectangles are quite centralized around 0.5 and 1.0. Therefore we can safely expand the confidence range of ellipses.
+Second we see that only 82\% ellipses are correctly recognized. The issue here is similar to the first one, but slightly different with the solution. The $Extent$ ratio for triangles and rectangles are quite centralized around 0.5 and 1.0. Therefore we can \textbf{safely expand the confidence range} of ellipses.
 
-Finally We see that squares and rectangles are sometimes mixed up. This makes sense because some of rectangle images in our data do look like squares. To deal with this type of error, we may consider using new features, such as identifying and comparing all the sides in the shape.
+Finally We see that squares and rectangles are sometimes mixed up. This makes sense because some of rectangle images in our data do look like squares. If we are to deal with this type of error, we may consider using new features, such as identifying and comparing all the sides in the shape.
+
+Besides, there are about 5\% figures showing a $Extent$ ratio of 1 due to image processing errors. When these figures happend to be non-rectangles, they will be recognized as triangles as explained above. The reason for the errors are currently unknown.
 
 \subsubsection{Result on Testing Set}
 
@@ -39,17 +41,33 @@ After applying the necessary tweaks to the ``parameters'' (boundaries of fuzzy s
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 \backslashbox{Label}{Recognized} & Circle & Ellipse & Triangle & Square & Rectangle \\ \hline
-Circle & 0.96 & 0.01 & 0.03 & 0.00 & 0.00 \\ \hline
-Ellipse & 0.28 & 0.70 & 0.02 & 0.00 & 0.00 \\ \hline
-Triangle & 0.00 & 0.00 & 0.99 & 0.00 & 0.01 \\ \hline
-Square & 0.00 & 0.00 & 0.00 & 0.90 & 0.10 \\ \hline
-Rectangle & 0.00 & 0.01 & 0.03 & 0.39 & 0.58 \\ \hline
+Circle & \textbf{0.96} & 0.01 & 0.03 & 0.00 & 0.00 \\ \hline
+Ellipse & 0.08 & \textbf{0.90} & 0.02 & 0.00 & 0.00 \\ \hline
+Triangle & 0.00 & 0.00 & \textbf{0.99} & 0.00 & 0.01 \\ \hline
+Square & 0.00 & 0.00 & 0.00 & \textbf{0.90} & 0.10 \\ \hline
+Rectangle & 0.00 & 0.01 & 0.03 & 0.39 & \textbf{0.58} \\ \hline
 \end{tabular}
-\caption{Confusion Matrix on Testing Data}
+\caption{Confusion Matrix on Testing Set}
 \end{table}
 
-Apart from the squares and rectangles mixing up, we notice that circles and ellipses also mix up due to similar reasons: some of ellipse images in our data do look like circles. But as this is largely due to the \textbf{inherent ambiguity in the images we use}, it would not be a serious issue when testing against hand-drawn sketches. Because \textbf{sketches are usually exaggerated in some ways to avoid double interpretation}, unless the person who draws them intentionally make them very ambiguous.
+Apart from the squares and rectangles mixing up, we notice that circles and ellipses also mix up due to similar reasons: some of ellipse images in our data do look like circles. But as this is largely due to the \textbf{inherent ambiguity in the images we use}, it would not be a serious issue when testing against hand-drawn sketches. Because \textbf{sketches are usually exaggerated in some ways to avoid double interpretation}, unless the person who draws them intentionally make them very ambiguous or such a distinction is no necessary.
 
 \subsection{Hand-drawn Sketches}
 
-Under development.
+As the final evaluation of our system, we feed about 55 sketches drawn by two people to the recognizer. The sketches include 1 $\sim$ 3 figures each, and contain in total 20 figures for every category. The confusion matrix is in Table 3.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\backslashbox{Label}{Recognized} & Circle & Ellipse & Triangle & Square & Rectangle \\ \hline
+Circle & \textbf{20} & 0 & 0 & 0 & 0 \\ \hline
+Ellipse & 1 & \textbf{19} & 0 & 0 & 0 \\ \hline
+Triangle & 0 & 0 & \textbf{20} & 0 & 0 \\ \hline
+Square & 0 & 0 & 0 & \textbf{18} & 2 \\ \hline
+Rectangle & 0 & 0 & 0 & 5 & \textbf{15} \\ \hline
+\end{tabular}
+\caption{Confusion Matrix on Sketches}
+\end{table}
+
+We can see that performance is pretty good. There's only one problem left: sometimes squares are recognized as rectangles. The reason seems to be that value of $Thinness$ ratio is somewhat very sensitive to the input image.

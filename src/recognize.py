@@ -37,7 +37,7 @@ class ShapeRecognizer(object):
         self.inferencer.add_rules(rules.values())
 
     def recognize(self, img_file, multi=False):
-        inputs = process_image(img_file)
+        inputs = process_image(img_file, multi)
         result = self.inferencer.evaluate(inputs)
         return result['Shape']
 
