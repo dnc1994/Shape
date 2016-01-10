@@ -34,3 +34,6 @@ Read report for implementation details and experimental results.
 * `src/recognize.py` Interface for recognition.
 * `src/rule_base.txt` Rule base for the system.
 * `data/sample/` Sample images used in development and evaluation.
+
+## License
+[MIT license](https://github.com/dnc1994/coursera-dashboard/blob/master/LICENSE)
