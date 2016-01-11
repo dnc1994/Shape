@@ -1,12 +1,12 @@
 \section{Evaluation}
 
-The evaluation consists of two parts: one with computer-generated test set, one with hand-drawn sketches.
+The evaluation consists of two parts: one with computer-generated testing set, one with hand-drawn sketches.
 
-\subsection{Computer-generated Test Set}
+\subsection{Computer-generated Testing Set}
 
 \subsubsection{Result on Developing Set}
 
-The confusion matrix for the evaluation on the development set is in Table 1. The developing set contains 1000 figures with 200 figures from each category.
+The confusion matrix for the evaluation on the developing set is in Table 1. The developing set contains 1000 figures with 200 figures from each category.
 
 \begin{table}[ht!]
 \centering
@@ -28,13 +28,13 @@ First we see that nearly a half of circles are incorrectly recognized as triangl
 
 Second we see that only 82\% ellipses are correctly recognized. The issue here is similar to the first one, but slightly different with the solution. The $Extent$ ratio for triangles and rectangles are quite centralized around 0.5 and 1.0. Therefore we can \textbf{safely expand the confidence range} of ellipses.
 
-Finally We see that squares and rectangles are sometimes mixed up. This makes sense because some of rectangle images in our data do look like squares. If we are to deal with this type of error, we may consider using new features, such as identifying and comparing all the sides in the shape.
+Finally we see that squares and rectangles are sometimes mixed up. This makes sense because \textbf{some of rectangle images in our data do look like squares}. If we are to deal with this type of error, we may consider using new features, such as identifying and comparing all the sides in the shape.
 
-Besides, there are about 5\% figures showing a $Extent$ ratio of 1 due to image processing errors. When these figures happend to be non-rectangles, they will be recognized as triangles as explained above. The reason for the errors are currently unknown.
+Besides, there are about 5\% figures showing a $Extent$ ratio of 1 due to image processing errors. Then when these figures happend to be non-rectangles, they will be recognized as triangles as explained above. The reason for the errors are currently unknown.
 
 \subsubsection{Result on Testing Set}
 
-After applying the necessary tweaks to the ``parameters'' (boundaries of fuzzy sets), we evaluate our system on the testing set, which also contains 1000 figures with 200 figures from each category. The confusion matrix is in Table 2.
+After applying the necessary tweaks to the ``parameters'' (boundaries of fuzzy sets), we evaluate our system on the testing set, which contains 1000 figures with 200 figures from each category. The confusion matrix is in Table 2.
 
 \begin{table}[ht!]
 \centering
@@ -50,7 +50,7 @@ Rectangle & 0.00 & 0.01 & 0.03 & 0.39 & \textbf{0.58} \\ \hline
 \caption{Confusion Matrix on Testing Set}
 \end{table}
 
-Apart from the squares and rectangles mixing up, we notice that circles and ellipses also mix up due to similar reasons: some of ellipse images in our data do look like circles. But as this is largely due to the \textbf{inherent ambiguity in the images we use}, it would not be a serious issue when testing against hand-drawn sketches. Because \textbf{sketches are usually exaggerated in some ways to avoid double interpretation}, unless the person who draws them intentionally make them very ambiguous or such a distinction is no necessary.
+Apart from the squares and rectangles mixing up, we notice that circles and ellipses also mix up due to similar reasons: some of ellipse images in our data do look like circles. But as this is largely due to the \textbf{inherent ambiguity in the images we use}, it would not be a serious issue when testing against hand-drawn sketches. Because \textbf{sketches are usually exaggerated in some ways to avoid multiple interpretations}, unless the person who draws them intentionally make them very ambiguous or such a distinction is not necessary.
 
 \subsection{Hand-drawn Sketches}
 

@@ -1,10 +1,10 @@
 \section{Fuzzy Inference}
 
-A simplified Sugeno-style fuzzy inference system is developed with functionalities for fuzzy rule / sets parsing, input fuzzification, autonomous inferencing and output defuzzification.
+A simplified Sugeno-style fuzzy inference system is developed with functionalities for fuzzy rule / set parsing, input fuzzification, fuzzy inferencing and output defuzzification.
 
 \subsection{Determining Fuzzy sets}
 
-As mentioned in the previous section, the noises in the image inevitably introduces uncertainties to our system. Therefore the feature values referenced in our rules have to be represented in fuzzy sets.
+As mentioned in the previous section, the noises in the image inevitably introduces uncertainties to our system. Therefore \textbf{the feature values referenced in our rules have to be represented in fuzzy sets}.
 
 To determine the \textbf{best fuzzy sets capturing the appropriate degree of uncertainties}, we use the statistics from the training set to find the optimal threshold.
 
@@ -29,7 +29,7 @@ For $Thinness$, we use 3 fuzzy sets for ellipse-like, rectangle-like and triangl
 
 Now that the fuzzy sets are determined, we have to implement the inference engine. But the specific nature of our task requires us to make some adaptations to the the usual fuzzy inference engine.
 
-Firstly, unlike the example from the textbook, the set of possible outputs in our task is \textbf{NOT} a set of linguistic values which can be represented by a series of contiguous intervals. We can't compute a COG-like output and decide which category it falls in, because we can't assign a reasonable order to the shapes.
+Firstly, unlike the example from the textbook, the set of possible outputs in our task is \textbf{NOT} a set of linguistic values which can be represented by a series of contiguous intervals. We can't compute a COG-like output and decide which category it falls in, because it's not possible to assign a reasonable order to the shapes.
 
 Secondly, rules derived in the previous section are all of the format:
 

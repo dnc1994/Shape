@@ -4,16 +4,16 @@ Feature extraction is mainly done with OpenCV.
 
 \subsection{Contours}
 
-Contours are probably the most starightforward feature that one can think of. With the help of OpenCV, once we've found the \textbf{contour} of the target figure, we can calcuate the following:
+Contours are probably the most starightforward feature one can think of. With the help of OpenCV, once we've found the \textbf{contour} of the target figure, we can calcuate the following:
 
 \begin{itemize}
-\item Perimeter: apply cv2.arcLength on the contour gives us an approximation of the perimeter.
-\item Area: apply cv2.contourArea on the contour gives us an approximation of the area.
+\item Perimeter: apply \textit{cv2.arcLength} on the contour gives us an approximation of the perimeter.
+\item Area: apply \textit{cv2.contourArea} on the contour gives us an approximation of the area.
 \end{itemize}
 
 \subsection{SIFT}
 
-SIFT allows us to easily find key points (corners) in the image. At first glance it seems to be a great feature, since it can distinguish circles / ellipses from triangles and rectangles / squares. However, the extraction of this feature is highly unstable. A little noise (e.g. a zigzag line) in the image could increase the number of key points by more than 20. Although it's possible to set some thresholds to tune out the undesired key points, still we couldn't put too much confidence on this feature.
+SIFT allows us to easily find key points (corners) in the image. At first glance it seems to be a great feature, since it can distinguish circles / ellipses from triangles and rectangles / squares. However, the extraction of this feature is \textbf{highly unstable}. A little noise (e.g. a zigzag line) in the image could increase the number of key points by more than 20. Although it's possible to set some thresholds to tune out the undesired key points, still we couldn't put too much confidence on this feature.
 
 \subsection{Feature Expansion}
 
